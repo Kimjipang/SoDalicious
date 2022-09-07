@@ -23,6 +23,7 @@ public class ArticleService {
     }
     // 게시물 상세 조회
     public cms__article getArticle(Long article_id) {
+        articleMapper.viewCount(article_id);
         return articleMapper.findById(article_id);
     }
     // 게시물 목록 조회

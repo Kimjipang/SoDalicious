@@ -7,11 +7,17 @@
 
     <!-- 게시물 작성 -->
     <insert id="postArticle" parameterType="com.example.sodalicious.article.domain.ArticleRequest">
-        INSERT cms__article (title, content_html, content_string) VALUES (#{title}, #{content}, #{content})
+        INSERT cms__article (board_id, created_datetime, is_pinned, view_count, title, content_html, content_string)
+            VALUES (#{board_id}, now(), false, 0, #{title}, #{content}, #{content})
     </insert>
 
+    <!-- 게시물 상세 조회 view 카운트 증가 -->
+    <update id="viewCount" parameterType="long">
+        UPDATE cms__article SET view_count = view_count+1 WHERE article_id = #{value}
+    </update>
+
     <!-- 게시물 상세 조회 -->
-    <select id="findById" resultType="com.example.sodalicious.article.domain.ArticleResponse">
+    <select id="findById" parameterType="long" resultType="com.example.sodalicious.article.domain.cms__article">
         SELECT * FROM cms__article WHERE article_id = #{value}
     </select>
 

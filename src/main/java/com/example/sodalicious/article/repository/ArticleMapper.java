@@ -12,6 +12,8 @@ public interface ArticleMapper {
 
     // 게시물 생성
     void postArticle(ArticleRequest request);
+    // 게시물 상세 조회 view 카운트 증가
+    void viewCount(Long article_id);
     // 게시물 상세 조회
     cms__article findById(Long article_id);
     // 게시물 목록 조회
