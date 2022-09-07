@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.sodalicious.board.repository.BoardMapper">
+
+    <!-- 게시판 작성 -->
+    <insert id="postBoard" parameterType="com.example.sodalicious.board.domain.BoardRequest">
+        INSERT cms__board (name_ko) VALUES (#{name_ko})
+    </insert>
+
+    <!-- 게시판 상세 조회 -->
+    <select id="findById" parameterType="long" resultType="com.example.sodalicious.board.domain.BoardResponse">
+        SELECT * FROM cms__board WHERE board_id = #{id}
+    </select>
+
+    <!-- 게시판 목록 조회 -->
+    <select id="findAll" resultType="com.example.sodalicious.board.domain.BoardResponse">
+        SELECT * FROM cms__board;
+    </select>
+
+    <!-- 게시판 삭제 -->
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM cms__board WHERE board_id = #{id}
+    </delete>
+
+</mapper>
