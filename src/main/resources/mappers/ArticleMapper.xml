@@ -22,7 +22,7 @@
     </select>
 
     <!-- 게시물 목록 조회 -->
-    <select id="findAll" resultType="com.example.sodalicious.article.domain.ArticleResponse">
+    <select id="findAll" resultType="com.example.sodalicious.article.domain.cms__article">
         SELECT * FROM cms__article;
     </select>
 
@@ -32,20 +32,12 @@
     </delete>
 
     <!-- 게시물 검색 (단어) -->
-    <select id="searchAllByTitle" parameterType="String" resultType="com.example.sodalicious.article.domain.ArticleResponse">
+    <select id="searchAllByTitle" parameterType="String" resultType="com.example.sodalicious.article.domain.cms__article">
         SELECT * FROM cms__article WHERE board_id IN (SELECT board_id FROM cms__board WHERE name_ko LIKE CONCAT ('%', #{title}, '%'))
-<!--        <choose>-->
-<!--                <when test="name_ko != null">-->
-<!--                    SELECT * FROM cms__article WHERE board_id IN (SELECT board_id FROM cms__board WHERE name_ko LIKE CONCAT ('%', #{title}, '%'))-->
-<!--                </when>-->
-<!--                <when test="created_datetime">-->
-<!--                    SELECT * FROM cms__article WHERE created_datetime BETWEEN #{start} and #{end}-->
-<!--                </when>-->
-<!--        </choose>-->
     </select>
 
     <!-- 게시물 검색 (날짜) -->
-    <select id="searchAllByDate" parameterType="String" resultType="com.example.sodalicious.article.domain.ArticleResponse">
+    <select id="searchAllByDate" parameterType="java.sql.Timestamp" resultType="com.example.sodalicious.article.domain.cms__article">
         SELECT * FROM cms__article WHERE created_datetime BETWEEN #{start} AND #{end}
     </select>
 

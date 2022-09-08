@@ -7,9 +7,6 @@ import lombok.Setter;
 @Setter
 public class ArticleRequest {
 
-//    private Long article_id;
-//    private Boolean is_pinned;
-//    private Long view_count;
     private Long board_id;
     private String title;
     private String content;

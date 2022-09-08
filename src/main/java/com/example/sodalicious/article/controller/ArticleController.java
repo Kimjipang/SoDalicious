@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -53,10 +53,14 @@ public class ArticleController {
     // 게시물 검색 (특정 기간)
     @GetMapping("/search/date")
     public ResponseEntity<List<cms__article>> searchAllArticlesByDate(
-            @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDateTime start,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDateTime end
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end
     ) {
-        List<cms__article> searchResult = articleService.searchAllByDate(start, end);
+        Timestamp timestamp1 = Timestamp.valueOf(start.toLocalDate().atStartOfDay());
+        Timestamp timestamp2 = Timestamp.valueOf(end.toLocalDate().atStartOfDay());
+        System.out.println(timestamp1);
+        System.out.println(timestamp2);
+        List<cms__article> searchResult = articleService.searchAllByDate(timestamp1, timestamp2);
         return ResponseEntity.ok().body(searchResult);
     }
 }

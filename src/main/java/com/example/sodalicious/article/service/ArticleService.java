@@ -6,7 +6,7 @@ import com.example.sodalicious.article.repository.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -40,7 +40,7 @@ public class ArticleService {
         return articleMapper.searchAllByTitle(title);
     }
 
-    public List<cms__article> searchAllByDate(LocalDateTime start, LocalDateTime end) {
+    public List<cms__article> searchAllByDate(Timestamp start, Timestamp end) {
         return articleMapper.searchAllByDate(start, end);
     }
 }

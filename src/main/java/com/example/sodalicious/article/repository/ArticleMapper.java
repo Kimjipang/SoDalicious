@@ -5,7 +5,7 @@ import com.example.sodalicious.article.domain.cms__article;
 import com.example.sodalicious.article.domain.ArticleRequest;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
@@ -24,5 +24,5 @@ public interface ArticleMapper {
     // 게시물 검색
     List<cms__article> searchAllByTitle(String title);
 
-    List<cms__article> searchAllByDate(LocalDateTime start, LocalDateTime end);
+    List<cms__article> searchAllByDate(Timestamp start, Timestamp end);
 }
