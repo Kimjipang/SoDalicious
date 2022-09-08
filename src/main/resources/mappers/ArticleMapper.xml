@@ -31,9 +31,9 @@
         DELETE FROM cms__article WHERE article_id = #{id}
     </delete>
 
-    <!-- 게시물 검색 (단어) -->
-<!--    <select id="selectSearchList" parameterType="com.example.sodalicious.cmsarticle.domain.ArticleResponse" resultType="com.example.sodalicious.cmsarticle.domain.ArticleResponse">-->
-<!--        SELECT * FROM cms__article WHERE-->
-<!--    </select>-->
+    <!-- 게시물 검색 -->
+    <select id="searchArticleList" parameterType="String" resultType="com.example.sodalicious.article.domain.cms__article">
+        SELECT * FROM cms__article WHERE board_id =(SELECT board_id FROM cms__board WHERE title like #{%keyword%}
+    </select>
 
 </mapper>

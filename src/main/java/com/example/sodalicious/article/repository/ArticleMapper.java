@@ -20,4 +20,6 @@ public interface ArticleMapper {
     List<cms__article> findAll();
     // 게시물 삭제
     void deleteById(Long article_id);
+    // 게시물 검색
+    List<cms__article> searchArticleList(String title);
 }

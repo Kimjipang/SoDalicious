@@ -42,6 +42,11 @@ public class ArticleController {
         return ResponseEntity.ok().body("SUCCESS DELETE ARTICLE!");
     }
     // 게시물 검색 (단어)
-
+    @GetMapping("/search")
+    public ResponseEntity<List<cms__article>> searchAllArticles(@RequestParam String title) {
+        System.out.println(title);
+        List<cms__article> searchResult = articleService.searchAllArticles(title);
+        return ResponseEntity.ok().body(searchResult);
+    }
     // 특정기간 게시물 조회
 }

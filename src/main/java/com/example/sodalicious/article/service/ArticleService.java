@@ -34,4 +34,8 @@ public class ArticleService {
     public void deleteArticle(Long article_id) {
         articleMapper.deleteById(article_id);
     }
+    // 게시물 검색
+    public List<cms__article> searchAllArticles(String title) {
+        return articleMapper.searchArticleList(title);
+    }
 }
