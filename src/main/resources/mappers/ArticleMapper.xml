@@ -13,7 +13,7 @@
 
     <!-- 게시물 상세 조회 view 카운트 증가 -->
     <update id="viewCount" parameterType="long">
-        UPDATE cms__article SET view_count = view_count+1 WHERE article_id = #{value}
+        UPDATE cms__article SET view_count = view_count + 1 WHERE article_id = #{value}
     </update>
 
     <!-- 게시물 상세 조회 -->
@@ -31,9 +31,22 @@
         DELETE FROM cms__article WHERE article_id = #{id}
     </delete>
 
-    <!-- 게시물 검색 -->
-    <select id="searchArticleList" parameterType="String" resultType="com.example.sodalicious.article.domain.cms__article">
-        SELECT * FROM cms__article WHERE board_id =(SELECT board_id FROM cms__board WHERE title like #{%keyword%}
+    <!-- 게시물 검색 (단어) -->
+    <select id="searchAllByTitle" parameterType="String" resultType="com.example.sodalicious.article.domain.ArticleResponse">
+        SELECT * FROM cms__article WHERE board_id IN (SELECT board_id FROM cms__board WHERE name_ko LIKE CONCAT ('%', #{title}, '%'))
+<!--        <choose>-->
+<!--                <when test="name_ko != null">-->
+<!--                    SELECT * FROM cms__article WHERE board_id IN (SELECT board_id FROM cms__board WHERE name_ko LIKE CONCAT ('%', #{title}, '%'))-->
+<!--                </when>-->
+<!--                <when test="created_datetime">-->
+<!--                    SELECT * FROM cms__article WHERE created_datetime BETWEEN #{start} and #{end}-->
+<!--                </when>-->
+<!--        </choose>-->
+    </select>
+
+    <!-- 게시물 검색 (날짜) -->
+    <select id="searchAllByDate" parameterType="String" resultType="com.example.sodalicious.article.domain.ArticleResponse">
+        SELECT * FROM cms__article WHERE created_datetime BETWEEN #{start} AND #{end}
     </select>
 
 </mapper>

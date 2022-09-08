@@ -4,9 +4,12 @@ package com.example.sodalicious.article.controller;
 import com.example.sodalicious.article.domain.cms__article;
 import com.example.sodalicious.article.domain.ArticleRequest;
 import com.example.sodalicious.article.service.ArticleService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -42,11 +45,18 @@ public class ArticleController {
         return ResponseEntity.ok().body("SUCCESS DELETE ARTICLE!");
     }
     // 게시물 검색 (단어)
-    @GetMapping("/search")
-    public ResponseEntity<List<cms__article>> searchAllArticles(@RequestParam String title) {
-        System.out.println(title);
-        List<cms__article> searchResult = articleService.searchAllArticles(title);
+    @GetMapping("/search/word")
+    public ResponseEntity<List<cms__article>> searchAllArticlesByTitle(@RequestParam String title) {
+        List<cms__article> searchResult = articleService.searchAllByTitle(title);
         return ResponseEntity.ok().body(searchResult);
     }
-    // 특정기간 게시물 조회
+    // 게시물 검색 (특정 기간)
+    @GetMapping("/search/date")
+    public ResponseEntity<List<cms__article>> searchAllArticlesByDate(
+            @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDateTime start,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-mm-dd") LocalDateTime end
+    ) {
+        List<cms__article> searchResult = articleService.searchAllByDate(start, end);
+        return ResponseEntity.ok().body(searchResult);
+    }
 }

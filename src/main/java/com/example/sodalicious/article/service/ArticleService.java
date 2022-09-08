@@ -6,6 +6,7 @@ import com.example.sodalicious.article.repository.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,7 +36,11 @@ public class ArticleService {
         articleMapper.deleteById(article_id);
     }
     // 게시물 검색
-    public List<cms__article> searchAllArticles(String title) {
-        return articleMapper.searchArticleList(title);
+    public List<cms__article> searchAllByTitle(String title) {
+        return articleMapper.searchAllByTitle(title);
+    }
+
+    public List<cms__article> searchAllByDate(LocalDateTime start, LocalDateTime end) {
+        return articleMapper.searchAllByDate(start, end);
     }
 }
